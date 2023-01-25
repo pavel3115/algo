@@ -1,0 +1,109 @@
+class Car:
+    """
+    """
+    color: str='white'
+    engine_power: int=90
+    max_fuel: int=75
+    consumption: float=1
+    now_fuel: int=0
+
+    def __init__(self, color: str  = 'black', engine_power: int  =  150, max_fuel: int  =  9, consumption: float  =  8, now_fuel: float  =  10):
+        self.color = color
+        self.engine_power = engine_power
+        self.max_fuel = max_fuel
+        self.consumption  = consumption
+        self.now_fuel: float = now_fuel
+
+    def set_color(self, color):
+        self.color = color
+        return self.color
+    def get_color(self):
+        return self.color
+    def get_max_fuel(self):
+        return self.max_fuel
+    def set_max_fuel(self, max_fuel):
+        self.max_fuel = max_fuel
+        return self.max_fuel
+    def get_fuel(self):
+        return self.now_fuel
+    def get_consumption(self):
+        return self.consumption
+    def get_refill(self):
+        return self.max_fuel - self.now_fuel
+    def refill(self, fuel):
+        if self.max_fuel >= self.now_fuel:
+            if fuel > c.get_refill():
+                print('Нельзя заправиться')
+            else:
+                self.now_fuel += fuel
+                return self.now_fuel
+        else:
+            print('Дозаправка не требуется')
+
+    def true_distance(self):
+        return self.now_fuel / self.consumption
+
+c = Car(color='Purple', engine_power=555, max_fuel=70, consumption=5, now_fuel=15)
+
+print('Машина такого цвета:', c.get_color())
+print('Максимальный бак:', c.get_fuel())
+print(f'С запасом топлива {c.get_fuel()} можно проехать {c.true_distance()}')
+
+print()
+
+c.set_color('Yellow')
+c.set_max_fuel(60)
+print(f'Машина перекрашенна в {c.get_color()}')
+print(f'Максимальная вместимость бака {c.get_max_fuel()} литров')
+print(f'В баке сейчас {c.now_fuel} литров')
+print(f'Можно заправиться на {c.get_refill()} литров')
+c.refill(6)
+print(f'Можно проехать {c.true_distance()}')
+
+def test_init_1():
+    Car(color='white',
+        engine_power=90,
+        max_fuel=50,
+        consumption=9.3,
+        now_fuel=0)
+
+test_init_1()
+
+def test_init_2():
+    Car(color='white')
+    
+test_init_2()
+
+
+def test_color_1():
+    c = Car(color='white',
+            engine_power=90,
+            max_fuel=50,
+            consumption=9.3,
+            now_fuel=0)
+    assert c.get_color() == 'white'
+
+test_color_1()
+
+def test_color_2():
+    c = Car(color='white',
+            engine_power=90,
+            max_fuel=50,
+            consumption=9.3,
+            now_fuel=0)
+    assert c.get_color() == 'white'
+    c.set_color('red')
+
+test_color_2()
+
+def test_color_3():
+    c = Car(color='white',
+            engine_power=90,
+            max_fuel=50,
+            consumption=9.3,
+            now_fuel=0)
+    assert c.get_color() == 'white'
+    c.set_color('red')
+
+    assert c.get_color() == 'red'
+test_color_3()
